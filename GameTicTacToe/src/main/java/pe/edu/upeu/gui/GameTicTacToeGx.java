@@ -7,6 +7,10 @@ package pe.edu.upeu.gui;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pe.edu.upeu.dao.ResultadoDao;
+import pe.edu.upeu.dao.ResultadoDaoI;
+import pe.edu.upeu.modelo.ResultadoTO;
 
 /**
  *
@@ -18,6 +22,9 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
     private int xCount = 0;
     private int oCount = 0;
     boolean checker;
+
+    ResultadoDaoI rdao;
+    DefaultTableModel modelo;
 
     public GameTicTacToeGx() {
         initComponents();
@@ -54,24 +61,28 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
             jbtnTic1.setBackground(Color.ORANGE);
             jbtnTic2.setBackground(Color.ORANGE);
             jbtnTic3.setBackground(Color.ORANGE);
-                xCount++;
-                gameScore();
+            xCount++;
+            gameScore();
+            guardarjugadas();
+
         }
         if (b4 == ("X") && b5 == ("X") && b6 == ("X")) {
             JOptionPane.showMessageDialog(this, "Jugador 1 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic4.setBackground(Color.ORANGE);
             jbtnTic5.setBackground(Color.ORANGE);
             jbtnTic6.setBackground(Color.ORANGE);
-                xCount++;
-                gameScore();
+            xCount++;
+            gameScore();
+            guardarjugadas();
         }
         if (b7 == ("X") && b8 == ("X") && b9 == ("X")) {
             JOptionPane.showMessageDialog(this, "Jugador 1 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic7.setBackground(Color.GREEN);
             jbtnTic8.setBackground(Color.GREEN);
             jbtnTic9.setBackground(Color.GREEN);
-                xCount++;
-                gameScore();
+            xCount++;
+            gameScore();
+            guardarjugadas();
         }
         //VerticalX
         if (b1 == ("X") && b4 == ("X") && b7 == ("X")) {
@@ -79,24 +90,27 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
             jbtnTic1.setBackground(Color.GREEN);
             jbtnTic4.setBackground(Color.GREEN);
             jbtnTic7.setBackground(Color.GREEN);
-                xCount++;
-                gameScore();
+            xCount++;
+            gameScore();
+            guardarjugadas();
         }
         if (b2 == ("X") && b5 == ("X") && b8 == ("X")) {
             JOptionPane.showMessageDialog(this, "Jugador 1 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic2.setBackground(Color.GREEN);
             jbtnTic5.setBackground(Color.GREEN);
             jbtnTic8.setBackground(Color.GREEN);
-                xCount++;
-                gameScore();
+            xCount++;
+            gameScore();
+            guardarjugadas();
         }
         if (b3 == ("X") && b6 == ("X") && b9 == ("X")) {
             JOptionPane.showMessageDialog(this, "Jugador 1 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic3.setBackground(Color.GREEN);
             jbtnTic6.setBackground(Color.GREEN);
             jbtnTic9.setBackground(Color.GREEN);
-                xCount++;
-                gameScore();
+            xCount++;
+            gameScore();
+            guardarjugadas();
         }
         //Diagonal x
         if (b1 == ("X") && b5 == ("X") && b9 == ("X")) {
@@ -104,70 +118,78 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
             jbtnTic1.setBackground(Color.GREEN);
             jbtnTic5.setBackground(Color.GREEN);
             jbtnTic9.setBackground(Color.GREEN);
-                xCount++;
-                gameScore();
+            xCount++;
+            gameScore();
+            guardarjugadas();
         }
         if (b3 == ("X") && b5 == ("X") && b7 == ("X")) {
             JOptionPane.showMessageDialog(this, "Jugador 1 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic3.setBackground(Color.GREEN);
             jbtnTic5.setBackground(Color.GREEN);
             jbtnTic7.setBackground(Color.GREEN);
-                xCount++;
-                gameScore();
+            xCount++;
+            gameScore();
+            guardarjugadas();
         }
-         //---------------------------------------------------------------------
-         //---------------------------------------------------------------------
-         //---------------------------------------------------------------------
-         //Horizontal O
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
+        //Horizontal O
         if (b1 == ("O") && b2 == ("O") && b3 == ("O")) {
             JOptionPane.showMessageDialog(this, "Jugador 2 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic1.setBackground(Color.CYAN);
             jbtnTic2.setBackground(Color.CYAN);
             jbtnTic3.setBackground(Color.CYAN);
-                oCount++;
-                gameScore();
+            oCount++;
+            gameScore();
+            guardarjugadas();
         }
         if (b4 == ("O") && b5 == ("O") && b6 == ("O")) {
             JOptionPane.showMessageDialog(this, "Jugador 2 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic4.setBackground(Color.CYAN);
             jbtnTic5.setBackground(Color.CYAN);
             jbtnTic6.setBackground(Color.CYAN);
-                oCount++;
-                gameScore();
+            oCount++;
+            gameScore();
+            guardarjugadas();
         }
         if (b7 == ("O") && b8 == ("O") && b9 == ("O")) {
             JOptionPane.showMessageDialog(this, "Jugador 2 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic7.setBackground(Color.CYAN);
             jbtnTic8.setBackground(Color.CYAN);
             jbtnTic9.setBackground(Color.CYAN);
-                oCount++;
-                gameScore();
+            oCount++;
+            gameScore();
+            guardarjugadas();
         }
-       
+
         //Vertical O
         if (b1 == ("O") && b4 == ("O") && b7 == ("O")) {
             JOptionPane.showMessageDialog(this, "Jugador 2 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic1.setBackground(Color.CYAN);
             jbtnTic4.setBackground(Color.CYAN);
             jbtnTic7.setBackground(Color.CYAN);
-                oCount++;
-                gameScore();
+            oCount++;
+            gameScore();
+            guardarjugadas();
         }
         if (b2 == ("O") && b5 == ("O") && b8 == ("O")) {
             JOptionPane.showMessageDialog(this, "Jugador 2 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic2.setBackground(Color.CYAN);
             jbtnTic5.setBackground(Color.CYAN);
             jbtnTic8.setBackground(Color.CYAN);
-                oCount++;
-                gameScore();
+            oCount++;
+            gameScore();
+            guardarjugadas();
         }
         if (b3 == ("O") && b6 == ("O") && b9 == ("O")) {
             JOptionPane.showMessageDialog(this, "Jugador 2 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic3.setBackground(Color.CYAN);
             jbtnTic6.setBackground(Color.CYAN);
             jbtnTic9.setBackground(Color.CYAN);
-                oCount++;
-                gameScore();
+            oCount++;
+            gameScore();
+            guardarjugadas();
         }
         //Diagonal O
         if (b1 == ("O") && b5 == ("O") && b9 == ("O")) {
@@ -175,18 +197,20 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
             jbtnTic1.setBackground(Color.CYAN);
             jbtnTic5.setBackground(Color.CYAN);
             jbtnTic9.setBackground(Color.CYAN);
-                oCount++;
-                gameScore();
+            oCount++;
+            gameScore();
+            guardarjugadas();
         }
         if (b3 == ("O") && b5 == ("O") && b7 == ("O")) {
             JOptionPane.showMessageDialog(this, "Jugador 2 GANA", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
             jbtnTic3.setBackground(Color.CYAN);
             jbtnTic5.setBackground(Color.CYAN);
             jbtnTic7.setBackground(Color.CYAN);
-                oCount++;
-                gameScore();
+            oCount++;
+            gameScore();
+            guardarjugadas();
         }
-        
+
     }
 
     /**
@@ -202,8 +226,8 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtplayer2 = new javax.swing.JTextField();
+        txtplayer1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -260,8 +284,14 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, -1, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 130, 150, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 150, -1));
+        getContentPane().add(txtplayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 130, 150, -1));
+
+        txtplayer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtplayer1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtplayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 150, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -393,6 +423,7 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(51, 0, 51));
 
         jbtnTic2.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jbtnTic2.setEnabled(false);
         jbtnTic2.setMaximumSize(new java.awt.Dimension(80, 80));
         jbtnTic2.setMinimumSize(new java.awt.Dimension(80, 80));
         jbtnTic2.addActionListener(new java.awt.event.ActionListener() {
@@ -402,6 +433,7 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         });
 
         jbtnTic1.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jbtnTic1.setEnabled(false);
         jbtnTic1.setMaximumSize(new java.awt.Dimension(80, 80));
         jbtnTic1.setMinimumSize(new java.awt.Dimension(80, 80));
         jbtnTic1.addActionListener(new java.awt.event.ActionListener() {
@@ -411,6 +443,7 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         });
 
         jbtnTic3.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jbtnTic3.setEnabled(false);
         jbtnTic3.setMaximumSize(new java.awt.Dimension(80, 80));
         jbtnTic3.setMinimumSize(new java.awt.Dimension(80, 80));
         jbtnTic3.addActionListener(new java.awt.event.ActionListener() {
@@ -420,6 +453,7 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         });
 
         jbtnTic4.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jbtnTic4.setEnabled(false);
         jbtnTic4.setMaximumSize(new java.awt.Dimension(80, 80));
         jbtnTic4.setMinimumSize(new java.awt.Dimension(80, 80));
         jbtnTic4.addActionListener(new java.awt.event.ActionListener() {
@@ -429,6 +463,7 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         });
 
         jbtnTic5.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jbtnTic5.setEnabled(false);
         jbtnTic5.setMaximumSize(new java.awt.Dimension(80, 80));
         jbtnTic5.setMinimumSize(new java.awt.Dimension(80, 80));
         jbtnTic5.addActionListener(new java.awt.event.ActionListener() {
@@ -438,6 +473,7 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         });
 
         jbtnTic6.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jbtnTic6.setEnabled(false);
         jbtnTic6.setMaximumSize(new java.awt.Dimension(80, 80));
         jbtnTic6.setMinimumSize(new java.awt.Dimension(80, 80));
         jbtnTic6.addActionListener(new java.awt.event.ActionListener() {
@@ -447,6 +483,7 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         });
 
         jbtnTic7.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jbtnTic7.setEnabled(false);
         jbtnTic7.setMaximumSize(new java.awt.Dimension(80, 80));
         jbtnTic7.setMinimumSize(new java.awt.Dimension(80, 80));
         jbtnTic7.addActionListener(new java.awt.event.ActionListener() {
@@ -456,6 +493,7 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         });
 
         jbtnTic8.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jbtnTic8.setEnabled(false);
         jbtnTic8.setMaximumSize(new java.awt.Dimension(80, 80));
         jbtnTic8.setMinimumSize(new java.awt.Dimension(80, 80));
         jbtnTic8.addActionListener(new java.awt.event.ActionListener() {
@@ -465,6 +503,7 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
         });
 
         jbtnTic9.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jbtnTic9.setEnabled(false);
         jbtnTic9.setMaximumSize(new java.awt.Dimension(80, 80));
         jbtnTic9.setMinimumSize(new java.awt.Dimension(80, 80));
         jbtnTic9.addActionListener(new java.awt.event.ActionListener() {
@@ -599,8 +638,8 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnTic5ActionPerformed
 
     private void jbtnTic6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTic6ActionPerformed
-       jbtnTic6.setText(startGame);
-       checker = !startGame.equalsIgnoreCase("X");
+        jbtnTic6.setText(startGame);
+        checker = !startGame.equalsIgnoreCase("X");
         choose_a_Player();
         winningGame();
     }//GEN-LAST:event_jbtnTic6ActionPerformed
@@ -678,12 +717,53 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnNewGameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        jbtnTic1.setEnabled(true);
+        jbtnTic2.setEnabled(true);
+        jbtnTic3.setEnabled(true);
+        jbtnTic4.setEnabled(true);
+        jbtnTic5.setEnabled(true);
+        jbtnTic6.setEnabled(true);
+        jbtnTic7.setEnabled(true);
+        jbtnTic8.setEnabled(true);
+        jbtnTic9.setEnabled(true);
+        
+        rdao = new ResultadoDao();
+        ResultadoTO to = new ResultadoTO();
+        to.setNombre_jugador1(txtplayer1.getText());
+        to.setNombre_jugador2(txtplayer2.getText());
+        to.setGanador("Empate");
+        to.setPunto(0);
+        to.setEstado("Terminado");
+        ResultadoDaoI dao = new ResultadoDao();
+        dao.crearResultado(to);
+
+        int fila = jTable1.getSelectedRow();
+        if (fila != -1) {
+            try {
+                int resultado = rdao.crearResultado(to);
+                if (resultado != 0) {
+                    modelo = (DefaultTableModel) jTable1.getModel();
+                    Object nuevo[] = {fila + 1, to.getNombre_jugador1(), to.getNombre_jugador2(), to.getGanador(), to.getPunto(), to.getEstado(),};
+                    modelo.removeRow(fila);
+                    modelo.insertRow(fila, nuevo);
+                    
+                    
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtplayer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtplayer1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtplayer1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -705,8 +785,6 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton jbtReset;
     private javax.swing.JButton jbtnExit;
     private javax.swing.JButton jbtnNewGame;
@@ -721,5 +799,40 @@ public class GameTicTacToeGx extends javax.swing.JFrame {
     private javax.swing.JButton jbtnTic9;
     private javax.swing.JLabel jlblPlayerO;
     private javax.swing.JLabel jlblPlayerX;
+    private javax.swing.JTextField txtplayer1;
+    private javax.swing.JTextField txtplayer2;
     // End of variables declaration//GEN-END:variables
+
+    public void guardarjugadas() {
+        rdao = new ResultadoDao();
+        ResultadoTO to = new ResultadoTO();
+        to.setNombre_jugador1(txtplayer1.getText());
+        to.setNombre_jugador2(txtplayer2.getText());
+        to.setGanador("Empate");
+        to.setPunto(0);
+        to.setEstado("Terminado");
+        ResultadoDaoI dao = new ResultadoDao();
+        dao.crearResultado(to);
+
+        int fila = jTable1.getSelectedRow();
+        if (fila != -1) {
+            try {
+                int resultado = rdao.crearResultado(to);
+                if (resultado != 0) {
+                    modelo = (DefaultTableModel) jTable1.getModel();
+                    Object nuevo[] = {fila + 1, to.getNombre_jugador1(), to.getNombre_jugador2(), to.getGanador(), to.getPunto(), to.getEstado(),};
+                    modelo.removeRow(fila);
+                    modelo.insertRow(fila, nuevo);
+                    
+                    
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+
+        }
+     
+
+    }
+
 }
